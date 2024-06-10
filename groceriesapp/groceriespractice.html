@@ -1,0 +1,535 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lightening app</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+	background-image: url('https://res.cloudinary.com/djsm9ltap/image/upload/v1712828394/groceries%20web/111420-light-color-blurred-background-vector_armstx.jpg');
+	background-repeat:repeat;   
+	overflow-y: auto;
+	height: 5000px;
+	
+
+}
+    .icon {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        margin: 50px;
+	
+        
+	img{
+		width: 90px;
+		height: 90px;
+	}
+    }
+    .items {
+	display: none;
+	img{
+		width: 140px;
+		height: 140px;
+		
+	}
+	ul{
+		display: flex;
+		flex-direction: row;
+    		list-style-type: none;
+    		flex-wrap: wrap;
+    		justify-content: flex-start;
+		}
+
+	li {
+    		width: 15%;
+   		 margin-bottom: 20px; /* Add margin-bottom to create vertical space between items */
+    		border: 1px solid #ccc;
+    		padding: 10px;
+    		text-align: center;
+    		margin-right: 20px; /* Add margin-right to create horizontal space between items */
+		}
+	
+	}
+	
+	 body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+   
+    input[type="text"], input[type="number"] {
+        margin-bottom: 10px;
+        padding: 5px;
+        width: 200px;
+    }
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+	.original-price{
+    		text-decoration: line-through;
+    		font-size: 80%;
+	}
+	#add{
+		float: left;
+		img{
+		height: 50px;
+		width: 130px;
+		}
+}
+
+	.iconinside{
+	width: 20px;
+        height: 20px;
+        display: none;
+        margin: 50px;
+	
+        
+	img{
+		width: 90px;
+		height: 90px;
+	}
+    }
+	.insideiconcontainer{
+		display: flex;
+		flex-direction: row;
+		justify-container: flex-start;
+		flex-wrap: wrap;
+		
+}
+	.iconbg{
+		background-image: url('https://res.cloudinary.com/djsm9ltap/image/upload/v1712828905/groceries%20web/3872616_alflqc.jpg');
+		height:200px;
+		background-repeat: no-repeat;
+   		 background-attachment: fixed;
+    		background-position: center;
+
+}
+
+	.searchbar{
+			img{
+    				height: 25px;
+    				width: 25px;
+
+}
+}
+	.cart{
+		margin: 3px;
+		
+		img{
+			height: 45px;
+			width: 45px;
+}
+}
+	.topbar{
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+}
+	.search-results {
+        	display: none;
+    }
+
+</style>
+</head>
+<body>
+<div>
+<div class="addicon" id="add">
+<img src="https://res-console.cloudinary.com/djsm9ltap/thumbnails/v1/image/upload/v1713692373/Z3JvY2VyaWVzIHdlYi8tbGlnaHRlbmluZzFfLS1yZW1vdmViZy1wcmV2aWV3X2VwdHV1eg==/preview" alt="additems">
+</div>
+<div class="topbar">
+<div class="searchbar">
+	<img src="https://res-console.cloudinary.com/djsm9ltap/thumbnails/v1/image/upload/v1712833167/Z3JvY2VyaWVzIHdlYi9zZWFyY2gtdmVjdG9yLWNsaXBhcnQtMS1yZW1vdmViZy1wcmV2aWV3X2d4a3F0cg==/preview" alt="searchicon">
+	<input type="text" id="searchInput" oninput="searchItems()" placeholder="Search items..." style="width: 600px; height: 6px; padding: 10px;">
+	<button onclick="showSearchResultsPage()">View Search Results</button>
+
+</div>
+<div class="cart" id="cart">
+	<img src="https://res-console.cloudinary.com/djsm9ltap/thumbnails/v1/image/upload/v1712860248/Z3JvY2VyaWVzIHdlYi9PSVAtcmVtb3ZlYmctcHJldmlld19pbWVnZGc=/preview" alt="cart">
+</div>
+<div class="cart" id="login">
+	<a href="loginpage.html"><img src="https://res-console.cloudinary.com/djsm9ltap/thumbnails/v1/image/upload/v1712861091/Z3JvY2VyaWVzIHdlYi9PSVAtcmVtb3ZlYmctcHJldmlld18xX3czanA3eg==/preview" alt="login">
+	</a>
+</div>
+</div>
+</div>
+<div class="iconbg">
+
+<div class="icon" id="groceries">
+    <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_200,w_200/67ce530dbe4f7fbfa4c0cd4a20387250.png" alt="Groceries">
+    <p>Groceries          .</p>
+</div>
+
+
+<div class="icon" id="dairy">
+    <img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_200,w_200/ff7f6d7a32094a30aa5e5d5b0d2267b5.png" alt="Dairy">
+    <p>Dairy          .</p>
+</div>
+<div class="icon" id="vegetables">
+	<img src="https://res-console.cloudinary.com/djsm9ltap/thumbnails/v1/image/upload/v1712861968/Z3JvY2VyaWVzIHdlYi9lZjZkNzM5MmNjMTRjNGU1NWZkMzI1MDhhOGI4YjgwYl9iaWh5MzM=/preview" alt="vegetables">
+	<p>Fresh vegetables</p>
+</div>
+<div class="icon" id="fruits">
+	<img src="https://res-console.cloudinary.com/djsm9ltap/thumbnails/v1/image/upload/v1712861974/Z3JvY2VyaWVzIHdlYi80NGVlODc0ZS0xODFjLTRjMmUtOTNiMC02YTk0ZGIzMjU5ZDhfZTJhMjQxNjgtMzE5ZS00YWNlLTlhOGUtNTk1ZDVjM2Y4ZTk2X3dwMzR1bg==/preview" alt="vegetables">
+	<p>Fresh Fruits</p>
+</div>
+</div>
+<!------------------------------------inside additems--------------------------------------->
+
+<div class="insideiconcontainer" >
+<div class="iconinside" id="insidegroceries">
+	<img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_200,w_200/67ce530dbe4f7fbfa4c0cd4a20387250.png" alt="groceriesinside">
+	<p>Fill Groceries List</p>
+</div>
+<div class="iconinside" id="insidediary">
+	<img src="https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_200,w_200/ff7f6d7a32094a30aa5e5d5b0d2267b5.png" alt="diaryinside">
+	<p>Fill Diary List</p>
+</div>
+<div class="iconinside" id="insidevegetables">
+	<img src="https://res-console.cloudinary.com/djsm9ltap/thumbnails/v1/image/upload/v1712861968/Z3JvY2VyaWVzIHdlYi9lZjZkNzM5MmNjMTRjNGU1NWZkMzI1MDhhOGI4YjgwYl9iaWh5MzM=/preview" alt="diaryinside">
+	<p>Fill vegetables List</p>
+</div>
+<div class="iconinside" id="insidefruits">
+	<img src="https://res-console.cloudinary.com/djsm9ltap/thumbnails/v1/image/upload/v1712861974/Z3JvY2VyaWVzIHdlYi80NGVlODc0ZS0xODFjLTRjMmUtOTNiMC02YTk0ZGIzMjU5ZDhfZTJhMjQxNjgtMzE5ZS00YWNlLTlhOGUtNTk1ZDVjM2Y4ZTk2X3dwMzR1bg==/preview" alt="diaryinside">
+	<p>Fill fruits List</p>
+</div>
+</div>
+<script>
+
+	document.getElementById('add').addEventListener('click',function(){
+		var password=prompt("please enter the password !")
+		if (password==="sricharan"){
+		document.getElementById('insidegroceries').style.display='block';
+		document.getElementById('insidediary').style.display='block';
+		document.getElementById('insidevegetables').style.display='block';
+		document.getElementById('insidefruits').style.display='block';
+		document.getElementById('dairyItems').style.display='none';
+		document.getElementById('groceriesItems').style.display='none';
+		document.getElementById('vegetablesItems').style.display='none';
+		document.getElementById('fruitsItems').style.display='none';
+}
+
+		else{
+			alert("you entered wrong password  !!");
+}
+});
+</script>
+
+<!------------------------------------------------------------------------------------------>
+<!------------------------------------------------>
+
+<div class="items" id="addGroceriesItems">
+	<h2>Add Groceries Item</h2>
+
+	<form id="addItemForm">
+    		<input type="text" id="itemName" placeholder="Item Name" required><br>
+    		<input type="text" id="itemImage" placeholder="Image URL" required><br>
+   		<input type="number" id="originalPrice" placeholder="Original Price" required><br>
+    		<input type="number" id="discountPrice" placeholder="Discount Price" required><br>
+    		<input type="submit" value="Add Item">
+	</form>
+</div>
+
+<div class="items" id="addDiaryItems">
+	<h2>Add diary Item</h2>
+
+	<form id="addItemForm1">
+    		<input type="text" id="itemName1" placeholder="Item Name" required><br>
+    		<input type="text" id="itemImage1" placeholder="Image URL" required><br>
+   		<input type="number" id="originalPrice1" placeholder="Original Price" required><br>
+    		<input type="number" id="discountPrice1" placeholder="Discount Price" required><br>
+    		<input type="submit" value="Add Item">
+	</form>
+</div>
+<div class="items" id="addvegetablesItems">
+	<h2>Add vegetables Item</h2>
+
+	<form id="addItemForm2">
+    		<input type="text" id="itemName2" placeholder="Item Name" required><br>
+    		<input type="text" id="itemImage2" placeholder="Image URL" required><br>
+   		<input type="number" id="originalPrice2" placeholder="Original Price" required><br>
+    		<input type="number" id="discountPrice2" placeholder="Discount Price" required><br>
+    		<input type="submit" value="Add Item">
+	</form>
+</div>
+<div class="items" id="addfruitsItems">
+	<h2>Add fruits Item</h2>
+
+	<form id="addItemForm3">
+    		<input type="text" id="itemName3" placeholder="Item Name" required><br>
+    		<input type="text" id="itemImage3" placeholder="Image URL" required><br>
+   		<input type="number" id="originalPrice3" placeholder="Original Price" required><br>
+    		<input type="number" id="discountPrice3" placeholder="Discount Price" required><br>
+    		<input type="submit" value="Add Item">
+	</form>
+</div>
+
+<div class="items" id="groceriesItems">
+
+    <h2>Groceries Items:</h2>
+	
+    <ul>
+        
+        <!-- Add items as needed -->
+    </ul>
+	
+</div>
+
+<div class="items" id="dairyItems">
+    <h2>Dairy Items:</h2>
+    <ul>
+       
+        <!-- Add items as needed -->
+    </ul>
+</div>
+<div class="items" id="vegetablesItems">
+	<h2> Fresh Vegetables: </h2>
+	<ul>
+	</ul>
+</div>
+<div class="items" id="fruitsItems">
+	<h2> Fresh Fruits: </h2>
+	<ul>
+	</ul>
+</div>
+<!---------------------search----------->
+<div class="search-results" id="searchResults">
+    <h2>Search Results</h2>
+    <ul>
+        <!-- Search results will be dynamically added here -->
+    </ul>
+    <button onclick="showAllItems()">Back to All Items</button>
+</div>
+<!---------------------------------------------------------------------------------------------------------->
+<script>
+
+	document.getElementById('insidegroceries').addEventListener('click', function() {
+		document.getElementById('addGroceriesItems').style.display='block';
+		document.getElementById('addDiaryItems').style.display='none';
+		document.getElementById('addfruitsItems').style.display='none';
+		document.getElementById('addvegetablesItems').style.display='none';
+		document.getElementById('dairyItems').style.display='none';
+		document.getElementById('groceriesItems').style.display='none';
+		document.getElementById('vegetablesItems').style.display='none';
+		document.getElementById('fruitsItems').style.display='none';
+	});
+	document.getElementById('insidediary').addEventListener('click', function() {
+		document.getElementById('addDiaryItems').style.display='block';
+		document.getElementById('addGroceriesItems').style.display='none';
+		document.getElementById('addfruitsItems').style.display='none';
+		document.getElementById('addvegetablesItems').style.display='none';
+		document.getElementById('dairyItems').style.display='none';
+		document.getElementById('groceriesItems').style.display='none';
+		document.getElementById('vegetablesItems').style.display='none';
+		document.getElementById('fruitsItems').style.display='none';
+	});
+	document.getElementById('insidevegetables').addEventListener('click', function() {
+		document.getElementById('addvegetablesItems').style.display='block';
+		document.getElementById('addGroceriesItems').style.display='none';
+		document.getElementById('addDiaryItems').style.display='none';
+		document.getElementById('addfruitsItems').style.display='none';
+		document.getElementById('dairyItems').style.display='none';
+		document.getElementById('groceriesItems').style.display='none';
+		document.getElementById('vegetablesItems').style.display='none';
+		document.getElementById('fruitsItems').style.display='none';
+		
+	});
+	document.getElementById('insidefruits').addEventListener('click', function() {
+		document.getElementById('addfruitsItems').style.display='block';
+		document.getElementById('addDiaryItems').style.display='none';
+		document.getElementById('addGroceriesItems').style.display='none';
+		document.getElementById('addvegetablesItems').style.display='none';
+		document.getElementById('dairyItems').style.display='none';
+		document.getElementById('groceriesItems').style.display='none';
+		document.getElementById('vegetablesItems').style.display='none';
+		document.getElementById('fruitsItems').style.display='none';
+		
+	});
+    document.getElementById('groceries').addEventListener('click', function() {
+        document.getElementById('groceriesItems').style.display = 'block';
+        document.getElementById('dairyItems').style.display = 'none';
+	document.getElementById('vegetablesItems').style.display='none';
+	document.getElementById('fruitsItems').style.display='none';
+	document.getElementById('addGroceriesItems').style.display='none';
+	document.getElementById('addDiaryItems').style.display='none';
+	document.getElementById('addvegetablesItems').style.display='none';
+	document.getElementById('addfruitsItems').style.display='none';
+	document.getElementById('insidegroceries').style.display='none';
+	document.getElementById('insidediary').style.display='none';
+	document.getElementById('insidevegetables').style.display='none';
+	document.getElementById('insidefruits').style.display='none';
+
+
+    });
+
+    document.getElementById('dairy').addEventListener('click', function() {
+        document.getElementById('dairyItems').style.display = 'block';
+        document.getElementById('groceriesItems').style.display = 'none';
+	document.getElementById('fruitsItems').style.display = 'none';
+	document.getElementById('vegetablesItems').style.display = 'none';
+	document.getElementById('addGroceriesItems').style.display='none';
+	document.getElementById('addDiaryItems').style.display='none';
+	document.getElementById('addvegetablesItems').style.display='none';
+	document.getElementById('addfruitsItems').style.display='none';
+	document.getElementById('insidegroceries').style.display='none';
+	document.getElementById('insidediary').style.display='none';
+	document.getElementById('insidevegetables').style.display='none';
+	document.getElementById('insidefruits').style.display='none';
+
+    });
+  document.getElementById('vegetables').addEventListener('click', function() {
+	document.getElementById('vegetablesItems').style.display = 'block';
+        document.getElementById('dairyItems').style.display = 'none';        
+	document.getElementById('groceriesItems').style.display = 'none';
+        document.getElementById('fruitsItems').style.display = 'none';
+	document.getElementById('addGroceriesItems').style.display='none';
+	document.getElementById('addDiaryItems').style.display='none';
+	document.getElementById('addvegetablesItems').style.display='none';
+	document.getElementById('addfruitsItems').style.display='none';
+	document.getElementById('insidegroceries').style.display='none';
+	document.getElementById('insidediary').style.display='none';
+	document.getElementById('insidevegetables').style.display='none';
+	document.getElementById('insidefruits').style.display='none';
+
+    });
+
+    document.getElementById('fruits').addEventListener('click', function() {
+        document.getElementById('fruitsItems').style.display = 'block';
+        document.getElementById('groceriesItems').style.display = 'none';
+	document.getElementById('vegetablesItems').style.display = 'none';
+	document.getElementById('dairyItems').style.display = 'none';
+	document.getElementById('addGroceriesItems').style.display='none';
+	document.getElementById('addDiaryItems').style.display='none';
+	document.getElementById('addvegetablesItems').style.display='none';
+	document.getElementById('addfruitsItems').style.display='none';
+	document.getElementById('insidegroceries').style.display='none';
+	document.getElementById('insidediary').style.display='none';
+	document.getElementById('insidevegetables').style.display='none';
+	document.getElementById('insidefruits').style.display='none';
+	
+
+    });
+	
+</script>
+<script>
+    document.getElementById('addItemForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var itemName = document.getElementById('itemName').value;
+        var itemImage = document.getElementById('itemImage').value;
+        var originalPrice = document.getElementById('originalPrice').value;
+        var discountPrice = document.getElementById('discountPrice').value;
+        
+        // Create new list item with the item details
+        var newItem = document.createElement('li');
+        newItem.innerHTML = `
+           <img src="${itemImage}" alt="${itemName}" style="width: 100px; height: 100px;">
+
+            <p>${itemName}</p>
+            <p> <span class="original-price"> ₹${originalPrice}</span> ₹${discountPrice}</p>
+		<button onclick="additemstocart(this)"> Add to cart </button>
+		
+        `;
+        
+        // Append the new item to the groceries list
+        document.getElementById('groceriesItems').querySelector('ul').appendChild(newItem);
+        
+        // Clear the form fields after submission
+        document.getElementById('addItemForm').reset();
+    });
+</script>
+<script>
+	document.getElementById('addItemForm1').addEventListener('submit',function(event){
+		event.preventDefault();
+		var itemName1=document.getElementById('itemName1').value;
+		var itemImage1=document.getElementById('itemImage1').value;
+		var originalPrice1=document.getElementById('originalPrice1').value;
+		var discountPrice1=document.getElementById('discountPrice1').value;
+
+		var newItem1=document.createElement('li');
+		newItem1.innerHTML = `
+			<img src="${itemImage1}" alt="${itemName1}" style="width: 100px; height: 100px;"/>
+			<p>${itemName1}</p>
+			<p> <span class="original-price"> ₹${originalPrice1}</span> ₹${discountPrice1} </p>
+			<button onclick="additemstocart(this)"> Add to cart </button>
+		`;
+
+		document.getElementById('dairyItems').querySelector('ul').appendChild(newItem1);
+		document.getElementById('addItemForm1').reset();
+});
+</script>
+<script>
+	document.getElementById('addItemForm2').addEventListener('submit',function(event){
+		event.preventDefault();
+		var itemName2=document.getElementById('itemName2').value;
+		var itemImage2=document.getElementById('itemImage2').value;
+		var originalPrice2=document.getElementById('originalPrice2').value;
+		var discountPrice2=document.getElementById('discountPrice2').value;
+
+		var newItem2=document.createElement('li');
+		newItem2.innerHTML = `
+			<img src="${itemImage2}" alt="${itemName2}" style="width: 100px; height: 100px;"/>
+			<p>${itemName2}</p>
+			<p> <span class="original-price"> ₹${originalPrice2}</span> ₹${discountPrice2} </p>
+			<button onclick="additemstocart(this)"> Add to cart </button>
+		`;
+
+		document.getElementById('vegetablesItems').querySelector('ul').appendChild(newItem2);
+		document.getElementById('addItemForm2').reset();
+});
+</script>
+<script>
+	document.getElementById('addItemForm3').addEventListener('submit',function(event){
+		event.preventDefault();
+		var itemName3=document.getElementById('itemName3').value;
+		var itemImage3=document.getElementById('itemImage3').value;
+		var originalPrice3=document.getElementById('originalPrice3').value;
+		var discountPrice3=document.getElementById('discountPrice3').value;
+
+		var newItem3=document.createElement('li');
+		newItem3.innerHTML = `
+			<img src="${itemImage3}" alt="${itemName3}" style="width: 100px; height: 100px;"/>
+			<p>${itemName3}</p>
+			<p> <span class="original-price"> ₹${originalPrice3}</span> ₹${discountPrice3} </p>
+			<button onclick="additemstocart(this)"> Add to cart </button>
+		`;
+
+		document.getElementById('fruitsItems').querySelector('ul').appendChild(newItem3);
+		document.getElementById('addItemForm3').reset();
+});
+</script>
+<!-------------------------search------------------------>
+<script>
+function showSearchResultsPage() {
+    var searchQuery = document.getElementById('searchInput').value.toLowerCase();
+    var itemList = document.querySelectorAll('.items ul li');
+    var searchResults = [];
+
+    // Filter items based on search query
+    itemList.forEach(function(item) {
+        var itemName = item.textContent.toLowerCase();
+        if (itemName.includes(searchQuery)) {
+            searchResults.push(item.outerHTML); // Add matching item HTML to the array
+        }
+    });
+
+    // Encode the search results array as JSON and pass it as a URL parameter to the new page
+    var encodedSearchResults = encodeURIComponent(JSON.stringify(searchResults));
+    window.location.href = 'search_results.html?results=' + encodedSearchResults;
+}
+</script>
+<!----------------------------------------------------------->
+<!----------------------original content when back----------------->
+
+
+
+<!-------------------------------------------------->
+
+</body>
+</html>
+
